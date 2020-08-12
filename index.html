@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JavaScriptda soat</title>
+	<link rel="stylesheet" type="text/css" href="soat.css">
+	
+</head>
+<body>
+	<div class="kurant">
+	<div class="dx"></div>
+	<div class="dx1"></div>
+	<div class="dx3"></div>
+	<div class="dv4"></div>
+	<div class="cm"></div>
+	<div class="cm1"></div>
+	<div class="cm2"></div>
+	
+
+</div>
+	<canvas id="canvas" width="150" height="150"></canvas>
+<script type="text/javascript">
+	function clockPainting() {
+	let now = new Date();
+	let sec = now.getSeconds();
+	let min = now.getMinutes();
+	let hr = now.getHours();
+ let ctx = document.getElementById('canvas').getContext("2d");
+ ctx.save();
+ ctx.clearRect(0,0,150,150);
+ ctx.translate(75, 75); //joylashishi
+ ctx.scale(0.4, 0.4);
+ ctx.rotate(-Math.PI/2);
+
+ ctx.strokeStyle = "black";
+ ctx.fillStyle = "black";
+ ctx.lineWidth = 8;
+ ctx.lineCap = "round";
+ ctx.save();
+ ctx.beginPath();
+
+ for (var i = 0; i < 12; i++) //12ga bo'linishi
+ {
+ 	ctx.rotate(Math.PI/6);
+ 	ctx.moveTo(100,0);
+ 	ctx.lineTo(90,0);
+ }   
+
+ ctx.stroke();
+ ctx.restore();
+ ctx.save();
+
+ ctx.rotate((Math.PI/6)*hr + (Math.PI/360)*min + (Math.PI/21600)*sec);
+ ctx.lineWidth = 14;
+//soat strelkasi
+ ctx.beginPath();
+ ctx.moveTo(-20, 0);
+ ctx.lineTo(55, 0);
+ ctx.stroke();
+ ctx.restore();
+ ctx.save();
+//minut
+ ctx.rotate((Math.PI/30*min) + (Math.PI/1800)*sec);
+ ctx.lineWidth = 10;
+ ctx.beginPath();
+ ctx.moveTo(-25, 0);
+ ctx.lineTo(72, 0);
+ ctx.stroke();
+ ctx.restore();
+ ctx.save();
+//sekund
+ ctx.rotate(sec * Math.PI/30);
+ ctx.strokeStyle = "#D40000";
+ ctx.fillStyle = "D40000";
+ ctx.lineWidth = 6;
+ ctx.beginPath();
+ ctx.moveTo(-30, 0);
+ ctx.lineTo(85, 0);
+ ctx.stroke();
+ ctx.restore();
+ ctx.restore();
+}
+
+window.addEventListener('load', function (){
+	setInterval(clockPainting, 1000);
+});	
+</script>
+</body>
+</html>
